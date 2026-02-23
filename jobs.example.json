@@ -1,0 +1,63 @@
+[
+  {
+    "name": "morning-briefing",
+    "enabled": true,
+    "trigger": {
+      "kind": "time",
+      "expr": "30 6 * * *",
+      "tz": "local"
+    },
+    "action": {
+      "kind": "gateway",
+      "text": "Morning briefing time. Read procedures/morning-briefing.md and follow it."
+    }
+  },
+  {
+    "name": "gym-tracker",
+    "enabled": true,
+    "recurring": true,
+    "trigger": {
+      "kind": "geo",
+      "location": "gym",
+      "on": "both"
+    },
+    "action_enter": {
+      "kind": "gateway",
+      "spawn": true,
+      "text": "User arrived at the gym. Create a calendar event starting NOW."
+    },
+    "action_exit": {
+      "kind": "gateway",
+      "spawn": true,
+      "text": "User left the gym. Update the calendar event end time."
+    }
+  },
+  {
+    "name": "lunch-at-work",
+    "enabled": true,
+    "trigger": {
+      "kind": "time",
+      "expr": "0 13 * * 1-5",
+      "tz": "local",
+      "condition": {"at": "work"}
+    },
+    "action": {
+      "kind": "gateway",
+      "text": "It's 1 PM and you're still at the office. Lunch?"
+    }
+  },
+  {
+    "name": "one-shot-arrive-work",
+    "enabled": true,
+    "recurring": false,
+    "trigger": {
+      "kind": "geo",
+      "location": "work",
+      "on": "enter"
+    },
+    "action": {
+      "kind": "gateway",
+      "text": "Reminder: pick up package from the mailroom."
+    }
+  }
+]
