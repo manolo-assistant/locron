@@ -33,7 +33,7 @@ def get_location(api_url: str = "http://localhost:3000",
                 return {
                     "lat": float(p["latitude"]),
                     "lon": float(p["longitude"]),
-                    "timestamp": int(time.time()),
+                    "timestamp": int(p.get("timestamp", time.time())),
                 }
     except Exception:
         pass
